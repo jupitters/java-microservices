@@ -18,5 +18,7 @@ public class ProductServiceImpl implements ProductService {
                 .description(request.description())
                 .price(request.price())
                 .build();
+
+        return productRepository.save(product);
     }
 }
