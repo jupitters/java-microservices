@@ -16,6 +16,6 @@ public class ProductController {
     private final ProductService productService;
 
     public ResponseEntity<Product> createProduct(@RequestBody ProductRequest product) {
-        return ResponseEntity.ok(productService.);
+        return ResponseEntity.ok(productService.createProduct(product));
     }
 }
