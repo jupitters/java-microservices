@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
+    @Override
     public Product createProduct(ProductRequest request) {
         Product product = Product.builder()
                 .name(request.name())
