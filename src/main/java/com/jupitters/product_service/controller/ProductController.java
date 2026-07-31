@@ -20,6 +20,7 @@ public class ProductController {
                 .body(productService.createProduct(product));
     }
 
+    @GetMapping("/all")
     public ResponseEntity<Product> getAllProducts() {
         return productService.getAllProducts();
     }
