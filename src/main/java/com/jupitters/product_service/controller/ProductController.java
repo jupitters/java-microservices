@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/product")
 @RequiredArgsConstructor
@@ -21,7 +23,7 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Product> getAllProducts() {
+    public ResponseEntity<List<Product>> getAllProducts() {
         return productService.getAllProducts();
     }
 }
