@@ -7,7 +7,7 @@ import com.jupitters.product_service.model.Product;
 import java.util.List;
 
 public interface ProductService {
-    Product createProduct(ProductRequest request);
+    ProductResponse createProduct(ProductRequest request);
     List<ProductResponse> getAllProducts();
     Product getProductById();
 }
