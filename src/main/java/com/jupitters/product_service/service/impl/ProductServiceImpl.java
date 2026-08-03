@@ -23,7 +23,10 @@ public class ProductServiceImpl implements ProductService {
                 .price(request.price())
                 .build();
 
-        return productRepository.save(product);
+
+        productRepository.save(product);
+
+        return new ProductResponse(product.getId(), product.getName(), product.getDescription(), product.getPrice());
     }
 
     @Override
