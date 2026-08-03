@@ -1,6 +1,7 @@
 package com.jupitters.product_service.service.impl;
 
 import com.jupitters.product_service.dto.ProductRequest;
+import com.jupitters.product_service.dto.ProductResponse;
 import com.jupitters.product_service.model.Product;
 import com.jupitters.product_service.repository.ProductRepository;
 import com.jupitters.product_service.service.ProductService;
@@ -26,8 +27,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(p -> new ProductResponse(p.getId(), p.getName(), p.getDescription(), p.getPrice()))
+                .toList();
     }
 
     @Override
