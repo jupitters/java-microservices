@@ -11,7 +11,7 @@ class ProductServiceApplicationTests {
 	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0.5");
 
 	@Test
-	void shouldcCeateProduct() {
+	void shouldCreateProduct() {
 	}
 
 }
