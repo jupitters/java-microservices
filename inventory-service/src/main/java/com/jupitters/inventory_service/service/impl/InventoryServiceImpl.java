@@ -12,6 +12,6 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public boolean isInStock(String skuCode, Integer quantity) {
-        return inventoryRepository.existsBySkuCodeAndQuantityIsGreaterThanEquals(skuCode, quantity);
+        return inventoryRepository.existsBySkuCodeAndQuantityIsGreaterThanEqual(skuCode, quantity);
     }
 }
