@@ -1,5 +1,6 @@
 package com.jupitters.order_services.service.impl;
 
+import com.jupitters.order_services.client.InventoryClient;
 import com.jupitters.order_services.dto.OrderRequest;
 import com.jupitters.order_services.model.Order;
 import com.jupitters.order_services.repository.OrderRepository;
@@ -13,15 +14,22 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final InventoryClient inventoryClient;
 
     @Override
     public void placeOrder(OrderRequest request){
-        Order order = new Order();
-        order.setOrderNumber(UUID.randomUUID().toString());
-        order.setPrice(request.price());
-        order.setSkuCode(request.skuCode());
-        order.setQuantity(request.quantity());
+        boolean isProductInStock = inventoryClient.isInStock(request.skuCode(), request.quantity());
 
-        orderRepository.save(order);
+        if(isProductInStock){
+            Order order = new Order();
+            order.setOrderNumber(UUID.randomUUID().toString());
+            order.setPrice(request.price());
+            order.setSkuCode(request.skuCode());
+            order.setQuantity(request.quantity());
+
+            orderRepository.save(order);
+        } else {
+            throw new RuntimeException("Product with SkuCode" + request.skuCode() + " not in stock.");
+        }
     }
 }
