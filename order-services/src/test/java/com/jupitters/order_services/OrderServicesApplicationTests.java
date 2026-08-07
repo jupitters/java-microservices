@@ -1,5 +1,6 @@
 package com.jupitters.order_services;
 
+import com.jupitters.order_services.stubs.InventoryClientStubs;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,6 +43,7 @@ class OrderServicesApplicationTests {
                     "quantity":1
                 }
                 """;
+        InventoryClientStubs.stubInventoryCall("iphone_15", 1);
 
         var responseBodyString = RestAssured.given()
                 .contentType("application/json")
