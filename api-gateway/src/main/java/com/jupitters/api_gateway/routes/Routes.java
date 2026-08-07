@@ -30,4 +30,15 @@ public class Routes {
                 .before(BeforeFilterFunctions.uri("http://localhost:8081"))
                 .build();
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> inventoryServiceRoute() {
+        return GatewayRouterFunctions.route("inventory_service")
+                .route(
+                        RequestPredicates.path("/api/inventory"),
+                        HandlerFunctions.http()
+                )
+                .before(BeforeFilterFunctions.uri("http://localhost:8082"))
+                .build();
+    }
 }
