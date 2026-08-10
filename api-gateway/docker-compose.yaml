@@ -15,7 +15,7 @@ services:
     command: ["start-dev", "--import-realm"]
     environment:
       DB_VENDOR: MYSQL
-      DB_ADDR: mysql
+      DB_ADDR: keycloak-mysql
       DB_DATABASE: keycloak
       DB_USER: keycloak
       DB_PASSWORD: keycloak
@@ -24,9 +24,10 @@ services:
     ports:
       - "8181:8080"
     volumes:
-      - ./keycloak/realms/:/opt/keycloak/data/import/
+      - keycloak_realms:/opt/keycloak/data/import/
     depends_on:
       - keycloak-mysql
 
 volumes:
   mysql_keycloak_data:
+  keycloak_realms:
