@@ -29,7 +29,8 @@ public class Routes {
                         RequestPredicates.path("/aggregate/product-service/v3/api-docs"),
                         HandlerFunctions.http()
                 )
-                .before(BeforeFilterFunctions.uri("http://localhost:8080/v3/api-docs"))
+                .before(BeforeFilterFunctions.uri("http://localhost:8080"))
+                .before(BeforeFilterFunctions.setPath("/v3/api-docs"))
                 .build();
     }
 
@@ -51,7 +52,8 @@ public class Routes {
                         RequestPredicates.path("/aggregate/order-service/v3/api-docs"),
                         HandlerFunctions.http()
                 )
-                .before(BeforeFilterFunctions.uri("http://localhost:8081/v3/api-docs"))
+                .before(BeforeFilterFunctions.uri("http://localhost:8081"))
+                .before(BeforeFilterFunctions.setPath("/v3/api-docs"))
                 .build();
     }
 
@@ -73,7 +75,8 @@ public class Routes {
                         RequestPredicates.path("/aggregate/inventory-service/v3/api-docs"),
                         HandlerFunctions.http()
                 )
-                .before(BeforeFilterFunctions.uri("http://localhost:8082/v3/api-docs"))
+                .before(BeforeFilterFunctions.uri("http://localhost:8082"))
+                .before(BeforeFilterFunctions.setPath("/v3/api-docs"))
                 .build();
     }
 }
