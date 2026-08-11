@@ -22,6 +22,7 @@ public class Routes {
                 .build();
     }
 
+    @Bean
     public RouterFunction<ServerResponse> productServiceSwaggerRoute() {
         return GatewayRouterFunctions.route("product_service_swagger")
                 .route(
