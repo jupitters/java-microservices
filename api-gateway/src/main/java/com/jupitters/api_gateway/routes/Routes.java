@@ -15,7 +15,7 @@ public class Routes {
     public RouterFunction<ServerResponse> productServiceRoute() {
         return GatewayRouterFunctions.route("product_service")
                 .route(
-                        RequestPredicates.path("/api/product"),
+                        RequestPredicates.path("/api/product/**"),
                         HandlerFunctions.http()
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8080"))
@@ -38,7 +38,7 @@ public class Routes {
     public RouterFunction<ServerResponse> orderServiceRoute() {
         return GatewayRouterFunctions.route("order_service")
                 .route(
-                        RequestPredicates.path("/api/order"),
+                        RequestPredicates.path("/api/order/**"),
                         HandlerFunctions.http()
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8081"))
@@ -61,7 +61,7 @@ public class Routes {
     public RouterFunction<ServerResponse> inventoryServiceRoute() {
         return GatewayRouterFunctions.route("inventory_service")
                 .route(
-                        RequestPredicates.path("/api/inventory"),
+                        RequestPredicates.path("/api/inventory/**"),
                         HandlerFunctions.http()
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8082"))
