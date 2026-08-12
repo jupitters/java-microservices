@@ -76,6 +76,8 @@ public class Routes {
                         HandlerFunctions.http()
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8082"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("inventoryServiceCircuitBreaker",
+                        URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
@@ -88,6 +90,8 @@ public class Routes {
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8082"))
                 .before(BeforeFilterFunctions.setPath("/v3/api-docs"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("invenotrySwaggerServiceCircuitBreaker",
+                        URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
