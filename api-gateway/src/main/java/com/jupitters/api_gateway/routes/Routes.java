@@ -80,6 +80,7 @@ public class Routes {
                 .build();
     }
 
+    @Bean
     public RouterFunction<ServerResponse> fallbackRoute() {
         return GatewayRouterFunctions.route("fallbackRoute")
                 .GET("/fallbackRoute", request -> ServerResponse.status(HttpStatus.SERVICE_UNAVAILABLE)
