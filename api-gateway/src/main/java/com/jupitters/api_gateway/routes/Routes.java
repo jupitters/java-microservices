@@ -49,6 +49,8 @@ public class Routes {
                         HandlerFunctions.http()
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8081"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("orderServiceCircuitBreaker",
+                        URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
@@ -61,6 +63,8 @@ public class Routes {
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8081"))
                 .before(BeforeFilterFunctions.setPath("/v3/api-docs"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("orderServiceSwaggerCircuitBreaker",
+                        URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
