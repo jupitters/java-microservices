@@ -1,12 +1,15 @@
 package com.jupitters.api_gateway.routes;
 
 import org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions;
+import org.springframework.cloud.gateway.server.mvc.filter.CircuitBreakerFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
 import org.springframework.cloud.gateway.server.mvc.handler.HandlerFunctions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.function.*;
+
+import java.net.URI;
 
 
 @Configuration
@@ -19,6 +22,8 @@ public class Routes {
                         HandlerFunctions.http()
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8080"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("productServiceCircuitBreaker",
+                        URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
@@ -31,6 +36,8 @@ public class Routes {
                 )
                 .before(BeforeFilterFunctions.uri("http://localhost:8080"))
                 .before(BeforeFilterFunctions.setPath("/v3/api-docs"))
+                .filter(CircuitBreakerFilterFunctions.circuitBreaker("productServiceSwaggerCircuitBreaker",
+                        URI.create("forward:/fallbackRoute")))
                 .build();
     }
 
