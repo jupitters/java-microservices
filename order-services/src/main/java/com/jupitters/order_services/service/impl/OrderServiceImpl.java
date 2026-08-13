@@ -7,6 +7,7 @@ import com.jupitters.order_services.model.Order;
 import com.jupitters.order_services.repository.OrderRepository;
 import com.jupitters.order_services.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final InventoryClient inventoryClient;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
     @Override
     public void placeOrder(OrderRequest request){
@@ -31,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.save(order);
 
             OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), request.userDetails().email());
+            kafkaTemplate.send("order-placed", orderPlacedEvent);
         } else {
             throw new RuntimeException("Product with SkuCode" + request.skuCode() + " not in stock.");
         }
