@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 
             orderRepository.save(order);
 
-            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), request.userDetails().getEmail());
+            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), request.userDetails().email());
         } else {
             throw new RuntimeException("Product with SkuCode" + request.skuCode() + " not in stock.");
         }
