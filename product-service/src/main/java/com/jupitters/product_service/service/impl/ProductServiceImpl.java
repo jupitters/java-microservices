@@ -20,6 +20,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = Product.builder()
                 .name(request.name())
                 .description(request.description())
+                .skuCode(request.skuCode())
                 .price(request.price())
                 .build();
 
