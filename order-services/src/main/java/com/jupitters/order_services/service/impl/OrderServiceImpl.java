@@ -2,6 +2,7 @@ package com.jupitters.order_services.service.impl;
 
 import com.jupitters.order_services.client.InventoryClient;
 import com.jupitters.order_services.dto.OrderRequest;
+import com.jupitters.order_services.event.OrderPlacedEvent;
 import com.jupitters.order_services.model.Order;
 import com.jupitters.order_services.repository.OrderRepository;
 import com.jupitters.order_services.service.OrderService;
@@ -28,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
             order.setQuantity(request.quantity());
 
             orderRepository.save(order);
+
+            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber(), request.userDetails().getEmail());
         } else {
             throw new RuntimeException("Product with SkuCode" + request.skuCode() + " not in stock.");
         }
