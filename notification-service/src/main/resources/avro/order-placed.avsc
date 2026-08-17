@@ -1,7 +1,7 @@
 {
     "type": "record",
     "name": "OrderPlacedEvent",
-    "namespace": "com.jupitters.order_services.event",
+    "namespace": "com.jupitters.notification_service.order",
     "fields": [
         { "name": "orderNumber", "type": "string" },
         { "name": "email", "type": "string" },
