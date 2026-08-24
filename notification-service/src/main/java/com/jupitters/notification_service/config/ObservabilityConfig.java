@@ -18,6 +18,7 @@ public class ObservabilityConfig {
         concurrentKafkaListenerContainerFactory.getContainerProperties().setObservationEnabled(true);
     }
 
-    @Bean
-    ObservedAspect observedAspect(ObservationRegistry registry) {return new ObservedAspect(registry)};
+    ObservedAspect observedAspect(ObservationRegistry registry) {
+        return new ObservedAspect(registry);
+    }
 }
