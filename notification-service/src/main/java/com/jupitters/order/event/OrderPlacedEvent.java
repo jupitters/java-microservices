@@ -1,4 +1,4 @@
-package com.jupitters.notification_service.order;
+package com.jupitters.order.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
