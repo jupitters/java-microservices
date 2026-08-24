@@ -51,6 +51,17 @@ services:
       - "3110:3100"
       - "9411:9411"
 
+  grafana:
+    image: grafana/grafana:10.1.0
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources:ro
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "3000:3000"
+
 volumes:
   mysql_keycloak_data:
   keycloak_realms:
